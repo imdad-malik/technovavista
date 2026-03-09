@@ -14,14 +14,13 @@ import {
 } from "@/components/ui/sheet";
 import { ModeToggle } from "./theme-btn";
 import { usePathname } from "next/navigation";
-import LoadingBar from "react-top-loading-bar"; // ✅ Importing LoadingBar
+import LoadingBar from "react-top-loading-bar";
 
 const Navbar = () => {
   const [progress, setProgress] = useState(0);
   const pathname = usePathname();
 
   useEffect(() => {
-    // Start and finish fake progress on route change
     setProgress(30);
     const timeout1 = setTimeout(() => setProgress(70), 100);
     const timeout2 = setTimeout(() => setProgress(100), 800);
@@ -34,9 +33,9 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ✅ Animated Top Loading Bar */}
+      {/* Top Loading Bar */}
       <LoadingBar
-        color="linear-gradient(to right, #00f0ff, #ff00f7, #ffc700)"
+        color="#a855f7"
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
         height={4}
@@ -45,6 +44,7 @@ const Navbar = () => {
 
       <nav className="p-4 bg-background/50 sticky top-0 border-b backdrop-blur z-50">
         <div className="container mx-auto flex justify-between items-center pb-6">
+          
           {/* Logo */}
           <Link href="/" className="text-lg font-bold">
             TechNovaVista
@@ -52,27 +52,38 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-4 items-center">
+
             <Link
               href="/"
-              className="transition duration-300 ease-in-out hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
+              className="transition duration-300 hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
             >
               Home
             </Link>
+
             <Link
               href="/blogs"
-              className="transition duration-300 ease-in-out hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
+              className="transition duration-300 hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
             >
               Blogs
             </Link>
+
+            <Link
+              href="/portfolio"
+              className="transition duration-300 hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
+            >
+              Portfolio
+            </Link>
+
             <Link
               href="/about"
-              className="transition duration-300 ease-in-out hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
+              className="transition duration-300 hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
             >
               About
             </Link>
+
             <Link
               href="/contact"
-              className="transition duration-300 ease-in-out hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
+              className="transition duration-300 hover:bg-purple-500 hover:text-white px-3 py-2 rounded"
             >
               Contact
             </Link>
@@ -80,16 +91,18 @@ const Navbar = () => {
             <div className="flex space-x-2 ml-4">
               <Button
                 variant="outline"
-                className="transition duration-300 ease-in-out hover:bg-purple-500 hover:text-white"
+                className="transition duration-300 hover:bg-purple-500 hover:text-white"
               >
                 Login
               </Button>
+
               <Button
                 variant="outline"
-                className="transition duration-300 ease-in-out hover:bg-purple-500 hover:text-white"
+                className="transition duration-300 hover:bg-purple-500 hover:text-white"
               >
                 Signup
               </Button>
+
               <ModeToggle />
             </div>
           </div>
@@ -108,7 +121,6 @@ const Navbar = () => {
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
                       strokeLinecap="round"
@@ -119,26 +131,39 @@ const Navbar = () => {
                   </svg>
                 </Button>
               </SheetTrigger>
-              <ModeToggle />
+
               <SheetContent>
                 <SheetHeader>
                   <SheetTitle>TechNovaVista</SheetTitle>
+
                   <SheetDescription>
                     <div className="flex flex-col gap-6 mt-4">
+
                       <Link href="/">Home</Link>
+
                       <Link href="/blogs">Blogs</Link>
+
+                      <Link href="/portfolio">Portfolio</Link>
+
                       <Link href="/about">About</Link>
+
                       <Link href="/contact">Contact</Link>
+
                       <div className="flex gap-2 mt-4">
                         <Button variant="outline">Login</Button>
                         <Button variant="outline">Signup</Button>
                       </div>
+
+                      <ModeToggle />
+
                     </div>
                   </SheetDescription>
+
                 </SheetHeader>
               </SheetContent>
             </Sheet>
           </div>
+
         </div>
       </nav>
     </>
