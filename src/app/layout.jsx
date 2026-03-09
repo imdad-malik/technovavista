@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+<<<<<<< HEAD
   metadataBase: new URL("https://technovavista.vercel.app"),
 
   title: {
@@ -101,15 +102,27 @@ export const metadata = {
 
   other: {
     "google-site-verification": "Kl-V36IL6MscZSW1NAP4xpYaCSMgY2oRs4X6qGLC-7U",
+=======
+  title: "TechNovaVista Blogs",
+  description: "TechNovaVista Blogs - Your Source for Tech Insights",
+  icons: {
+    icon: "/icons/favicon.ico",
+  },
+  other: {
+    "google-site-verification": "gWGy1TrUhldnJ8Q9M1mi4jd3JlD4Nf7fWurShxDG0i0",
+>>>>>>> 1391e0682d2a76934576acd50759d51e780d2b5d
   },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+<<<<<<< HEAD
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
+=======
+>>>>>>> 1391e0682d2a76934576acd50759d51e780d2b5d
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
@@ -142,4 +155,8 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1391e0682d2a76934576acd50759d51e780d2b5d
