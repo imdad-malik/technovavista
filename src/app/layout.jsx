@@ -66,7 +66,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: "https://technovavista.vercel.app",
+    canonical: "/",
   },
 
   icons: {
@@ -107,17 +107,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/favicon.png" type="image/png" />
-      </head>
+      <head />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
-        {/* ✅ GA4 Script for Google Analytics */}
+        {/* Google Analytics */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-240L7V6V1B"
           strategy="afterInteractive"
         />
+
         <Script id="gtag-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
