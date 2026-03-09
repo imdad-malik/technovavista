@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://article.technovavista.com
+
+# Sitemaps
+Sitemap: https://article.technovavista.com/sitemap.xml
