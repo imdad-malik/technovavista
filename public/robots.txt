@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://article.technovavista.com
+Host: https://technovavista.vercel.app
 
 # Sitemaps
-Sitemap: https://article.technovavista.com/sitemap.xml
+Sitemap: https://technovavista.vercel.app/sitemap.xml
