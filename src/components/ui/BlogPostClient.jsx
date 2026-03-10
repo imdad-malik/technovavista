@@ -1,81 +1,80 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+export const dynamicParams = false;
 
-export default function BlogPostClient({ title, description, image, content }) {
-  const [currentUrl, setCurrentUrl] = useState("");
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { notFound } from "next/navigation";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeRaw from "rehype-raw";
+import rehypeStringify from "rehype-stringify";
+import BlogPostClient from "@/components/ui/BlogPostClient";
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentUrl(window.location.href);
-    }
-  }, []);
+// ✅ This will pre-render all blog posts at build time
+export async function generateStaticParams() {
+  const postsDir = path.join(process.cwd(), "src/content");
+  const filenames = fs.readdirSync(postsDir);
 
-  const socialPlatforms = [
-    {
-      name: "Facebook",
-      icon: "/icons/facebook.svg",
-      url: `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`,
+  return filenames.map((filename) => ({
+    slug: filename.replace(/\.md$/, ""),
+  }));
+}
+
+// ✅ Metadata for SEO
+export async function generateMetadata({ params }) {
+  const filePath = path.join(process.cwd(), `src/content/${params.slug}.md`);
+  if (!fs.existsSync(filePath)) return {};
+
+  const fileContent = fs.readFileSync(filePath, "utf8");
+  const { data } = matter(fileContent);
+
+  return {
+    title: data.title,
+    description: data.description,
+    openGraph: {
+      title: data.title,
+      description: data.description,
+      images: data.image ? [data.image] : [],
     },
-    {
-      name: "Twitter",
-      icon: "/icons/twitter.svg",
-      url: `https://twitter.com/intent/tweet?url=${currentUrl}&text=${title}`,
+    twitter: {
+      card: "summary_large_image",
+      title: data.title,
+      description: data.description,
+      images: data.image ? [data.image] : [],
     },
-    {
-      name: "LinkedIn",
-      icon: "/icons/linkedin.svg",
-      url: `https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}`,
-    },
-    {
-      name: "WhatsApp",
-      icon: "/icons/whatsapp.svg",
-      url: `https://wa.me/?text=${currentUrl}`,
-    },
-  ];
+  };
+}
+
+// ✅ Render the blog post content
+export default async function BlogPost({ params }) {
+  const { slug } = params;
+  const filePath = path.join(process.cwd(), `src/content/${slug}.md`);
+  if (!fs.existsSync(filePath)) return notFound();
+
+  const fileContent = fs.readFileSync(filePath, "utf8");
+  const { data, content } = matter(fileContent);
+
+  const processedContent = await unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeStringify)
+    .process(content);
+
+  const contentHtml = processedContent.toString();
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-4">{title}</h1>
-      <p className="text-lg text-gray-500 dark:text-gray-300 mb-6">{description}</p>
-
-      {image && (
-        <Image
-          src={image}
-          alt={title}
-          width={800}
-          height={400}
-          className="rounded-lg mb-8 w-full object-cover"
-        />
-      )}
-
-      <div
-        className="prose max-w-none prose-img:rounded-md prose-a:text-blue-600 dark:prose-invert prose-video:w-full prose-video:h-auto"
-        dangerouslySetInnerHTML={{ __html: content }}
+    <main>
+      <BlogPostClient
+        title={data.title}
+        description={data.description}
+        image={data.image}
+        date={data.date}
+        content={contentHtml}
       />
-
-      <div className="mt-10">
-        <h3 className="text-xl font-semibold mb-3">Share this article:</h3>
-        <div className="flex space-x-4">
-          {socialPlatforms.map((platform) => (
-            <a
-              key={platform.name}
-              href={platform.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              title={`Share on ${platform.name}`}
-            >
-              <Image
-                src={platform.icon}
-                alt={platform.name}
-                width={32}
-                height={32}
-                className="hover:scale-110 transition-transform"
-              />
-            </a>
-          ))}
-        </div>
-      </div>
-    </div>
+    </main>
   );
 }
