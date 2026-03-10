@@ -40,6 +40,7 @@ const blogs = [
       "Explore how AI tools help students automate research, optimize content, and rank faster in search engines.",
     image: "https://images.pexels.com/photos/6153343/pexels-photo-6153343.jpeg",
   },
+  
 ];
 
 export default function BlogsPage() {
@@ -93,7 +94,7 @@ export default function BlogsPage() {
                 </p>
                 <div className="w-full flex justify-center">
                   <Link
-                    href={`/blogs/${blog.slug}`}
+                    href={`/blogsposts/${blog.slug}`}
                     className="inline-block px-5 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-600 rounded-full shadow-lg hover:from-purple-600 hover:to-blue-500 transition-all duration-300 text-center"
                   >
                     Read More
