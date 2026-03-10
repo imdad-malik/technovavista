@@ -19,12 +19,12 @@ export const metadata = {
   metadataBase: new URL("https://technovavista.vercel.app"),
 
   title: {
-    default: "AI SEO & Technical SEO Insights | TechNovaVista",
+    default: "AI SEO & Technical SEO Strategies | TechNovaVista",
     template: "%s | TechNovaVista",
   },
 
   description:
-    "Explore AI SEO strategies, technical SEO insights, SaaS and ecommerce SEO optimization tips to improve rankings, traffic, and modern search visibility.",
+    "Discover AI SEO strategies, advanced technical SEO insights, SaaS and ecommerce SEO optimization techniques to improve rankings, organic traffic, and modern search visibility.",
 
   keywords: [
     "AI SEO",
@@ -107,7 +107,108 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+
+        {/* Website Schema */}
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "TechNovaVista",
+              url: "https://technovavista.vercel.app",
+              description:
+                "AI SEO and Technical SEO insights, strategies, and tutorials to improve organic search rankings.",
+              publisher: {
+                "@type": "Organization",
+                name: "TechNovaVista",
+                url: "https://technovavista.vercel.app",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://technovavista.vercel.app/favicon.png"
+                }
+              }
+            }),
+          }}
+        />
+
+        {/* Person / Author Schema */}
+        <Script
+          id="author-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Imdad Malik",
+              url: "https://technovavista.vercel.app",
+              jobTitle: "SEO Expert",
+              sameAs: [
+                "https://www.linkedin.com/in/imdad-malik/",
+                "https://www.instagram.com/imdadmalikseoexpert/",
+                "https://web.facebook.com/imdadmalikseoexpert",
+                "https://x.com/imdadmalikseo",
+                "https://www.pinterest.com/imdadmalikseoexpert/"
+              ]
+            }),
+          }}
+        />
+
+        {/* Organization Schema */}
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "TechNovaVista",
+              url: "https://technovavista.vercel.app",
+              logo: "https://technovavista.vercel.app/favicon.png",
+              founder: {
+                "@type": "Person",
+                name: "Imdad Malik"
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+92-300-3985807",
+                contactType: "customer service",
+                areaServed: "Worldwide",
+                availableLanguage: ["English"]
+              },
+              sameAs: [
+                "https://www.linkedin.com/in/imdad-malik/",
+                "https://www.instagram.com/imdadmalikseoexpert/",
+                "https://web.facebook.com/imdadmalikseoexpert",
+                "https://x.com/imdadmalikseo",
+                "https://www.pinterest.com/imdadmalikseoexpert/"
+              ]
+            }),
+          }}
+        />
+
+        {/* WhatsApp Contact Schema */}
+        <Script
+          id="contact-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ContactPage",
+              name: "Contact TechNovaVista",
+              url: "https://wa.me/03003985807"
+            }),
+          }}
+        />
+
+      </head>
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
       >
