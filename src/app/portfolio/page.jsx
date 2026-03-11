@@ -191,7 +191,7 @@ export default function PortfolioClient() {
             {/* COURSERA */}
             <div className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg border flex flex-col justify-between">
               <Image
-                src="/coursera-certificate.jpg"
+                src="/coursera-certificate.png"
                 width={300}
                 height={300}
                 alt="Coursera SEO Certification"
